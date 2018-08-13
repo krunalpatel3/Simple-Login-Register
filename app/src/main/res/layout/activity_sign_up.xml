@@ -15,7 +15,7 @@
         android:id="@+id/Display_Sign_Up"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
         android:layout_alignParentTop = "true"
         android:text="Sign Up"
         android:textSize="36dp"
