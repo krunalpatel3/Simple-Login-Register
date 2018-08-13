@@ -23,9 +23,10 @@ public class SignUpActivity extends AppCompatActivity {
     private int GENDER = GENDER_UNKNOWN;
 
     private Spinner mGender;
-    private EditText mUsername_Edit,mEmail_Edit,mPassword_Edit;
+    private EditText mUsername_Edit,mEmail_Edit,mPassword_Edit,mRe_Password;
     private Button mSignUp;
 
+    private String mpasswordInput;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +35,7 @@ public class SignUpActivity extends AppCompatActivity {
         mEmail_Edit = findViewById(R.id.Email);
         mPassword_Edit = findViewById(R.id.Password);
         mSignUp = findViewById(R.id.btn);
-
+        mRe_Password = findViewById(R.id.Re_Password);
         mGender = findViewById(R.id.spinner_gender);
 
         SetupSpinner();
@@ -43,7 +44,7 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (!validateEmail() | !validatePassword() | !validateUsername()){
+                if (!validateEmail() | !validatePassword() | !validateUsername() | !validateRePassword()){
 
                     Toast.makeText(getApplication(),"Enter Worry!",Toast.LENGTH_LONG).show();
                 }else {
@@ -52,6 +53,8 @@ public class SignUpActivity extends AppCompatActivity {
                     input += "Username: " + mUsername_Edit.getText().toString();
                     input += "\n";
                     input += "Password: " + mPassword_Edit.getText().toString();
+                    input += "\n";
+                    input += "RePassword: " + mRe_Password.getText().toString();
                     input += "\n";
                     input += "GENDER: " + GENDER;
 
@@ -125,16 +128,34 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private boolean validatePassword() {
-        String passwordInput = mPassword_Edit.getText().toString().trim();
+        mpasswordInput = mPassword_Edit.getText().toString().trim();
 
-        if (passwordInput.isEmpty()) {
+        if (mpasswordInput.isEmpty()) {
             mPassword_Edit.setError("Field can't be empty");
             return false;
-        }else if (passwordInput.length() < 4 || passwordInput.length() > 10){
+        }else if (mpasswordInput.length() < 4 || mpasswordInput.length() > 10){
             mPassword_Edit.setError("between 4 and 10 alphanumeric characters");
             return false;
         }else {
             mPassword_Edit.setError(null);
+            return true;
+        }
+    }
+
+    private boolean validateRePassword() {
+        String re_passwordInput = mRe_Password.getText().toString().trim();
+
+        if (re_passwordInput.isEmpty()) {
+            mRe_Password.setError("Field can't be empty");
+            return false;
+        }else if (re_passwordInput.length() < 4 || re_passwordInput.length() > 10){
+            mRe_Password.setError("between 4 and 10 alphanumeric characters");
+            return false;
+        }else if (!re_passwordInput.equals(mpasswordInput)){
+            mRe_Password.setError("Passowrd Not Match!");
+            return false;
+        } else {
+            mRe_Password.setError(null);
             return true;
         }
     }
