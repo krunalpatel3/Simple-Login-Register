@@ -65,9 +65,7 @@ public class SignUpActivity extends AppCompatActivity {
         });
     }
 
-
     private void SetupSpinner() {
-
         ArrayAdapter genderSpinnerAdapter = ArrayAdapter.createFromResource(this,
                 R.array.array_gender_options, android.R.layout.simple_spinner_item);
 
@@ -146,7 +144,7 @@ public class SignUpActivity extends AppCompatActivity {
         String re_passwordInput = mRe_Password.getText().toString().trim();
 
         if (re_passwordInput.isEmpty()) {
-            mRe_Password.setError("Field can't be empty");
+            mRe_Password.setError("Field can't be empty@!");
             return false;
         }else if (re_passwordInput.length() < 4 || re_passwordInput.length() > 10){
             mRe_Password.setError("between 4 and 10 alphanumeric characters");
