@@ -130,6 +130,9 @@ public class SignUpActivity extends AppCompatActivity {
         if (passwordInput.isEmpty()) {
             mPassword_Edit.setError("Field can't be empty");
             return false;
+        }else if (passwordInput.length() < 4 || passwordInput.length() > 10){
+            mPassword_Edit.setError("between 4 and 10 alphanumeric characters");
+            return false;
         }else {
             mPassword_Edit.setError(null);
             return true;
